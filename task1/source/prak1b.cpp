@@ -9,41 +9,48 @@ using namespace std;
 class MySignal {
     private:
     int n = 0;
-    vector<float> temperatur_vektor;
-
+    vector<float> temperatur_vektor_outdoor;
+    vector<float> temperatur_vektor_indoor;
   public:
     MySignal()
     {
         cout << "How many values do you want to save?";
         cin >> n;
-        temperatur_vektor.resize(n);
-        for(int i = 0; i<temperatur_vektor.size();i++)
+        temperatur_vektor_outdoor.resize(n);
+        temperatur_vektor_indoor.resize(n);
+        for(int i = 0; i<temperatur_vektor_indoor.size();i++)
         {
             cout << "Add Temperatur: ";
-            cin >> temperatur_vektor[i];
+            cin >> temperatur_vektor_outdoor[i]>>temperatur_vektor_indoor[i];
             cout << endl;
         }
     }
     int anadir();
     void info();
-    float get_min();
+    float get_min(vector<float> vec_tmp);
     bool isNumber(const string& str);
 };
 
 int MySignal::anadir()
 {
-    string temp_now;
+    string temp_now_out;
+    string temp_now_in;
+
     cout << "which temp do you want to add? if you get out of While write no else just write the number: ";
-    cin >> temp_now;
-    if (isNumber(temp_now))
+    cin >> temp_now_out >> temp_now_in;
+    if (isNumber(temp_now_out) && isNumber(temp_now_in))
     {
-        float temp_numb = stof(temp_now);
-        if(temp_numb - get_min() < -5 )
+        float temp_numb_out = stof(temp_now_out);
+        float temp_numb_in = stof(temp_now_in);
+
+        temperatur_vektor_indoor.insert(temperatur_vektor_indoor.begin(),temp_numb_in);
+        temperatur_vektor_outdoor.insert(temperatur_vektor_outdoor.begin(),temp_numb_out);
+        info();
+        int diff = get_min(temperatur_vektor_indoor) - get_min(temperatur_vektor_outdoor);
+        if(diff > 5 || diff <-5)
         {
             cout << "-->Alarm!!!<--" << endl;
         }
-        temperatur_vektor.insert(temperatur_vektor.begin(),temp_numb);
-        info();
         return 1;
     }
     else
@@ -54,16 +61,24 @@ int MySignal::anadir()
 
 void MySignal::info()
 {
-    for(int i = 0; i<temperatur_vektor.size(); i++)
+    cout << "temperatur_vektor_outdoor"<<endl;
+    for(int i = 0; i<temperatur_vektor_outdoor.size(); i++)
     {
-        cout << temperatur_vektor[i] << " "<<endl;
+        cout << temperatur_vektor_outdoor[i] << ", ";
     }
+    cout << endl;
+    cout << "temperatur_vektor_indoor"<<endl;
+    for(int i = 0; i<temperatur_vektor_indoor.size(); i++)
+    {
+        cout << temperatur_vektor_indoor[i] << ", ";
+    }
+    cout << endl;
+
 }
 
-float MySignal::get_min()
+float MySignal::get_min(vector<float> vec_tmp)
 {
-    float min = *min_element(temperatur_vektor.begin(), temperatur_vektor.end());
-    cout << "min temp is: " << min <<endl;
+    float min = *min_element(vec_tmp.begin(), vec_tmp.end());
     return min;
 }
 
