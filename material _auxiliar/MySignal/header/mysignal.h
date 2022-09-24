@@ -19,9 +19,9 @@ public:
 
     void NewSample(float new_value);
     float GetValueDelayed(int delay) const; //TAREA
-    int GetCurrentSize() const;             //TAREA
-    int GetMaxSize() const;                 //TAREA
-    float GetMin() const;                   //TAREA
+    int GetCurrentSize() const;             //return the current Size of the vector
+    int GetMaxSize() const;                 //return the Max Size of the vector
+    float GetMin() const;                   //return the minum of the vector
 
     string GetName() const; //for functions with arguments of type const
 

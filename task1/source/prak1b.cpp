@@ -27,7 +27,7 @@ class MySignal {
     }
     int anadir();
     void info();
-    float get_min(vector<float> vec_tmp);
+    float get_min(const vector<float>& vec_tmp);
     bool isNumber(const string& str);
 };
 
@@ -76,7 +76,7 @@ void MySignal::info()
 
 }
 
-float MySignal::get_min(vector<float> vec_tmp)
+float MySignal::get_min(const vector<float>& vec_tmp)
 {
     float min = *min_element(vec_tmp.begin(), vec_tmp.end());
     return min;
