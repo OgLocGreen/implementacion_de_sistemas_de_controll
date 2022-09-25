@@ -18,8 +18,8 @@ public:
     ~MySignal();
 
     void NewSample(float new_value);
-    float GetValueDelayed(int delay) const; //TAREA
-    int GetCurrentSize() const;             //return the current Size of the vector
+    float GetValueDelayed(int delay) const; //know clue what this is
+    int GetCurrentSize() const;             //return the current Size of the vector how many values are in the vector
     int GetMaxSize() const;                 //return the Max Size of the vector
     float GetMin() const;                   //return the minum of the vector
 
