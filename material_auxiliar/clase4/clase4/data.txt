@@ -1,0 +1,14 @@
+<Dato>12.5</Datos>
+<Dato>12.5</Datos>
+<Dato>13.5</Datos>
+<Dato>12.5</Datos>
+<Dato>15.5</Datos>
+<Dato>12.5</Datos>
+<Dato>16.5</Datos>
+<Dato>12.5</Datos>
+<Dato>19.5</Datos>
+<Dato>55.5</Datos>
+<Dato>66.5</Datos>´
+<Dato>77.5</Datos>
+<Dato>88.5</Datos>
+<Dato>99.5</Datos>
