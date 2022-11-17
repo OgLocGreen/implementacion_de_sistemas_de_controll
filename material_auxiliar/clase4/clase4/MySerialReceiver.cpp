@@ -15,7 +15,7 @@ MySerialReceiver::MySerialReceiver(QObject *parent): QObject{parent}
                          this, SLOT(OnNewDataAvailable()));
     }
     else
-    {nnnn      n nbb
+    {
         qtOut << "Cant Read data \n";
         qtOut.flush();
     }

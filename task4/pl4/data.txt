@@ -1,0 +1,4 @@
+<radio>100</radio>
+<velo>5</velo>
+<color_ball>3</color_ball>
+<color_board>3</color_board>

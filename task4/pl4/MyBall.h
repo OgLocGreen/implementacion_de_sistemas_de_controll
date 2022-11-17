@@ -7,34 +7,51 @@ class MyBall
 {
 public:
     MyBall();
-    MyBall(float init_x, float init_y, int init_color, float init_radio, float init_velo);
+    MyBall(int init_x, int init_y, int init_color, int init_radio, int init_velo_x, int init_velo_y);
 private:
-    float velo = 0;
-    float radio = 0;
-    int color_var = 1;
-    float x = 0;
-    float y = 0;
-    float dx = 1;
-    float dy = 1;
+    double long velo_x = 0;
+    double long velo_y = 0;
+    int radio = 25;
+    QString color_var = "darkgreen";
+    int x = 220;
+    int y = 120;
+    int dx = 1;
+    int dy = 1;
 
-    enum color {red = 1, yellow = 2, green = 3};
+    //double long friccion = 0.001;
+    float slow_friccion = 0.001;
+    float slow_down_friccion = 0;
+
+    int x_min = 20;
+    int x_max = 420;
+
+    int y_min = 20;
+    int y_max = 220;
+
+    QString color = "darkGreen";
 
 public:
-    void set_postion(float arg_x, float arg_y);
-    float get_postion();
-    float get_postion_x();
-    float get_postion_y();
+    void set_postion(int arg_x, int arg_y);
+    int get_postion(int *arg_x, int*arg_y); //Pointer Cause we "give back "return" two Variabels
+    int get_postion_x();
+    int get_postion_y();
     void cal_new_postion();
+    bool check_rand();
 
     void set_color(int arg_color);
-    int get_color();
+    QString get_color();
 
     void set_radio(float arg_radio);
-    float get_radio();
+    int get_radio();
 
 
-    void set_velo(float arg_velo);
-    float get_velo();
+    void set_velo(int arg_velo_x, int arg_velo_y);
+    void set_velo_x(int arg_velo_x);
+    void set_velo_y(int arg_velo_y);
+    int get_velo_x();
+    int get_velo_y();
+    void get_velo(int *arg_x, int*arg_y);
+
 };
 
 #endif // MYBALL_H

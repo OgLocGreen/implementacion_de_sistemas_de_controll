@@ -14,11 +14,11 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QSpinBox" name="spinBox_velo">
+   <widget class="QSpinBox" name="spinBox_velo_x">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>130</y>
+      <x>100</x>
+      <y>10</y>
       <width>44</width>
       <height>26</height>
      </rect>
@@ -27,31 +27,34 @@
    <widget class="QSpinBox" name="spinBox_radio">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>170</y>
+      <x>110</x>
+      <y>90</y>
       <width>44</width>
       <height>26</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>500</number>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_velo">
+   <widget class="QLabel" name="label_velo_x">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>130</y>
+      <x>10</x>
+      <y>10</y>
       <width>81</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Velocidad: </string>
+     <string>Velocidad x: </string>
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox_pausa">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>80</y>
+      <x>270</x>
+      <y>120</y>
       <width>92</width>
       <height>23</height>
      </rect>
@@ -63,8 +66,8 @@
    <widget class="QLabel" name="label_radio">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>170</y>
+      <x>20</x>
+      <y>90</y>
       <width>81</width>
       <height>21</height>
      </rect>
@@ -73,62 +76,11 @@
      <string>Radio:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_color">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>260</y>
-      <width>89</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Color</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_box">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>180</y>
-      <width>361</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Box</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_circle">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>190</y>
-      <width>51</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>sunny.png</pixmap>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_x">
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>370</y>
+      <y>130</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -141,13 +93,75 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>410</y>
+      <y>150</y>
       <width>67</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
      <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>81</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Position X:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>150</y>
+      <width>81</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Position Y:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_board">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>200</y>
+      <width>440</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_velo_y">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Velocidad y: </string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_velo_y">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>50</y>
+      <width>44</width>
+      <height>26</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -160,8 +174,28 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuOptiones">
+    <property name="title">
+     <string>Optiones</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionChange_Params"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="menuOptiones"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionChange_Params">
+   <property name="text">
+    <string>Change Params ...</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open ...</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

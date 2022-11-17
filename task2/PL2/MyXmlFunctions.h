@@ -5,7 +5,6 @@
 #include <QTextStream>
 #include <QVector>
 
-
 QString XmlCreateTage(const QString& text, bool is_start_tag);
 QString XmlGetStr(const QString& text, const QString& tag);
 

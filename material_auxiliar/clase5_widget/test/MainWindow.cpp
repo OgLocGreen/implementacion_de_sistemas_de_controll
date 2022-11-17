@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-}p
+}
 
 
 void MainWindow::on_qSum_pushButton_clicked()
