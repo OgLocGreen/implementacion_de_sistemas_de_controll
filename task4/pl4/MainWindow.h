@@ -47,5 +47,7 @@ private slots:
 
     void on_actionChange_Params_triggered();
     void on_actionOpen_triggered();
+
+    virtual void mousePressEvent(QMouseEvent *event);
 };
 #endif // MAINWINDOW_H

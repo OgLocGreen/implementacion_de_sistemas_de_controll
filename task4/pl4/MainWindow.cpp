@@ -2,7 +2,6 @@
 #include "ui_ChangeBallParamsDlg.h"
 #include "ui_MainWindow.h"
 #include "ChangeBallParamsDlg.h"
-
 #include<QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -15,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
     timer->start(100);
     MyBall myBall;
+
 
 }
 
@@ -187,6 +187,14 @@ float MainWindow::conv(int *x, int*y)
     *y = relativ_y + 200;
     return (0);
 }
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    QMainWindow::mousePressEvent(event);
+}
+
+
+
 
 
 

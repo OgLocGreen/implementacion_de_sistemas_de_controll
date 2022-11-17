@@ -1,0 +1,20 @@
+Projekt
+1. USB-Stick mit Virtual box
+2. Konzept von Kommunicacion.
+3. Kurz noch mal zum BeagleBone Fragen obs da was zu beachtne gibt bei den pins und bei den Ausgängen. 
+4. Kurz noch mal auf den Plan eingehen welches gerät welche Sensoren manged und wer dann mit wem renden muss.
+5. Fragen was er davon hält mit dem Esp32 und dem Display.
+6. Auch wie es auschaut mit dem Multithreading auf den Esp32. Video und Signale und Webclient vlt zu viel?
+7. Notfall Lösung Raspberry Pi mit Display?
+8. Fragen ob er noch was zu sagen hat.
+
+Billard
+1. how to Calculate the Fricion right?
+2. how to connect the signals right? was this okay what i did? Bild 1
+    weil es ab und zu so flackert. Wenn man das Programm startet.
+3. klicking how to get possition of that click.
+        https://stackoverflow.com/questions/4349769/getting-mouse-click-location-of-a-label-in-qt
+        Bild 2
+
+4. do we need to calculate other balls as well? 
+
