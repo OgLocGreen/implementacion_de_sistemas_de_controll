@@ -4,6 +4,8 @@
 #include "ChangeBallParamsDlg.h"
 #include<QDebug>
 
+#include <QMouseEvent>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -163,6 +165,9 @@ void MainWindow::on_actionOpen_triggered()
 
 QString MainWindow::XmlGetStr(const QString &textXml, const QString &tagXml)
 {
+       // This one into Utiliy
+    // no need to Programm it twice
+
     QString ret;
     int istart, iend;
     int indexStart, lengStr;
@@ -188,15 +193,18 @@ float MainWindow::conv(int *x, int*y)
     return (0);
 }
 
+
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-    QMainWindow::mousePressEvent(event);
+
+    //QPoint relPos=event->pos() - ui->centralWidget->pos() - ui->qDrawLabel->pos();
+    //QMainWindow::mousePressEvent(event);
+
+    int x = event->x();
+    int y = event->y();
+    //QString pos = event->pos();
+
 }
-
-
-
-
-
 
 
 

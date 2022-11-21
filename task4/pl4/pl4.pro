@@ -12,6 +12,7 @@ SOURCES += \
     ChangeBallParamsDlg.cpp \
     MyBall.cpp \
     OpenFile.cpp \
+    Utility.cpp \
     main.cpp \
     MainWindow.cpp
 
@@ -19,7 +20,8 @@ HEADERS += \
     ChangeBallParamsDlg.h \
     MainWindow.h \
     MyBall.h \
-    OpenFile.h
+    OpenFile.h \
+    Utility.h
 
 FORMS += \
     ChangeBallParamsDlg.ui \

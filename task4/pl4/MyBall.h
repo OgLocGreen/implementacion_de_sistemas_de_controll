@@ -9,16 +9,16 @@ public:
     MyBall();
     MyBall(int init_x, int init_y, int init_color, int init_radio, int init_velo_x, int init_velo_y);
 private:
-    double long velo_x = 0;
-    double long velo_y = 0;
+    double velo_x = 0;
+    double velo_y = 0;
     int radio = 25;
     QString color_var = "darkgreen";
-    int x = 220;
-    int y = 120;
+    double x = 220;
+    double y = 120;
     int dx = 1;
     int dy = 1;
 
-    //double long friccion = 0.001;
+    double friccion = 0.0000001;
     float slow_friccion = 0.001;
     float slow_down_friccion = 0;
 

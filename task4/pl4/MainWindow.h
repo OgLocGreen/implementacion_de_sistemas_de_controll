@@ -24,6 +24,8 @@ private:
     QTimer myTimer;
     MyBall myBall;
     OpenFile myFile;
+    int mouse_x;
+    int mouse_y;
 
 public:
     MainWindow(QWidget *parent = nullptr);

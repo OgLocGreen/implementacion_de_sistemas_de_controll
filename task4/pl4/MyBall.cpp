@@ -123,23 +123,19 @@ void MyBall::cal_new_postion()
    // Also datatype what should i use?
    // is double long good? cause better to cacluclate small changes or is it to much?
 
-   /*
-   velo_x = velo_x*1000;
-   velo_y = velo_y*1000;
    velo_x -= velo_x*friccion;
    velo_y -= velo_y*friccion;
-   velo_x = velo_x/1000;
-   velo_y = velo_y/1000;
 
-   */
 
-   if(slow_down_friccion == 100)
+   /*
+   if(slow_down_friccion == 10)
    {
        velo_x -= velo_x*slow_friccion;
        velo_y -= velo_y*slow_friccion;
        slow_down_friccion = 0;
    }
    slow_down_friccion +=1;
+   */
 
 }
 
