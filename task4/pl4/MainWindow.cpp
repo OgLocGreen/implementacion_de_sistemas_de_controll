@@ -17,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent)
     timer->start(100);
     MyBall myBall;
 
-
 }
 
 MainWindow::~MainWindow()
@@ -105,6 +104,14 @@ void MainWindow::draw_board()
     int board_wide = 440;
     int board_hide = 240;
 
+    int array = {{{20,20},{30,20},{40,20}},
+                  {{20,60},{30,60},{40,60}}
+                };
+
+    int array = [[[20,20}],[30,20],[40,20]],
+                  [[20,60],[30,60],[40,60]]
+                ];
+
     // painter.drawRect(x,y, w, h);
 
     painter.setBrush( Qt::darkGreen);
@@ -143,6 +150,8 @@ void MainWindow::on_actionChange_Params_triggered()
     dlg.set_value_radio(myBall.get_radio());
     dlg.set_value_velo_x(myBall.get_velo_x());
     dlg.set_value_velo_y(myBall.get_velo_y());
+    dlg.set_value_ball_color(myBall.get_color());
+    dlg.set_value_board_color(board_color);
 
     if (dlg.exec() == QDialog::Accepted)
     {
@@ -155,6 +164,10 @@ void MainWindow::on_actionChange_Params_triggered()
         myBall.set_velo(dlg.get_value_velo_x(),dlg.get_value_velo_y());
         ui->doubleSpinBox_velo_x->setValue(myBall.get_velo_x());
         ui->doubleSpinBox_velo_y->setValue(myBall.get_velo_y());
+
+        myBall.set_color(dlg.get_value_ball_color());
+        board_color = dlg.get_value_board_color();
+
     }
 }
 
@@ -170,7 +183,9 @@ void MainWindow::on_actionOpen_triggered()
     arr = file.readAll();
     file.close();
     }
-    myBall.set_color(XmlGetStr(arr, "color").toInt());
+
+    // myBall.set_color(XmlGetStr(arr, "color").toQString()); Change into QSting
+
     myBall.set_radio(XmlGetStr(arr, "radio").toInt());
     myBall.set_velo_x(XmlGetStr(arr, "velo_x").toDouble());
     myBall.set_velo_y(XmlGetStr(arr, "velo_y").toDouble());
@@ -216,24 +231,37 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     //QPoint relPos=event->pos() - ui->centralWidget->pos() - ui->qDrawLabel->pos();
     //QMainWindow::mousePressEvent(event);
 
-    int x = event->x();
-    int y = event->y();
+    int mouse_x = event->x() -100;
+    int mouse_y = event->y() -220;
     //QString pos = event->pos();
 
-    int distancia_x = (myBall.get_postion_x() - x);
-    int distancia_y = (myBall.get_postion_y() - y);
+    int ball_pos_x = myBall.get_postion_x();
+    int ball_pos_y = myBall.get_postion_y();
+
+    int distancia_x = (ball_pos_x - mouse_x);
+    int distancia_y = (ball_pos_y - mouse_y);
     if(distancia_x<0)
      {
-            distancia_x *= -1;
-            distancia_y = distancia_y/2;
+        myBall.set_dx(-1);
+        distancia_x *= -1;
+        distancia_y = distancia_y/2;
      }
+    else
+    {
+        myBall.set_dx(1);
+    }
 
 
     if(distancia_y<0)
      {
-            distancia_y *= -1;
-            distancia_y = distancia_y/2;
+        myBall.set_dy(-1);
+        distancia_y *= -1;
+        distancia_y = distancia_y/2;
      }
+    else
+    {
+        myBall.set_dy(1);
+    }
 
     if(distancia_x > 99)
     {

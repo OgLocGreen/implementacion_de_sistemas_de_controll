@@ -12,7 +12,7 @@ private:
     double velo_x = 0;
     double velo_y = 0;
     int radio = 25;
-    QString color_var = "darkgreen";
+    QString color_var = "darkGreen";
     double x = 220;
     double y = 120;
     int dx = 1;
@@ -27,8 +27,6 @@ private:
     int y_min = 20;
     int y_max = 220;
 
-    QString color = "darkGreen";
-
 public:
     void set_postion(int arg_x, int arg_y);
     int get_postion(int *arg_x, int*arg_y); //Pointer Cause we "give back "return" two Variabels
@@ -37,7 +35,7 @@ public:
     void cal_new_postion();
     bool check_rand();
 
-    void set_color(int arg_color);
+    QString set_color(QString arg_color);
     QString get_color();
 
     void set_radio(float arg_radio);
@@ -50,6 +48,10 @@ public:
     double get_velo_x();
     double get_velo_y();
     void get_velo(double *arg_x, double*arg_y);
+
+   void set_d(int arg_dx, int arg_dy);
+   void set_dx(int arg_dx);
+   void set_dy(int arg_dy);
 
 };
 

@@ -26,6 +26,7 @@ private:
     OpenFile myFile;
     int mouse_x;
     int mouse_y;
+     QString board_color = "darkGreen";
 
 public:
     MainWindow(QWidget *parent = nullptr);

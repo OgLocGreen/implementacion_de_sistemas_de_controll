@@ -25,12 +25,14 @@ public:
     int get_value_radio();
     void set_value_radio(int v);
 
+    QString get_value_board_color();
+    void set_value_board_color(QString color);
+
+    QString get_value_ball_color();
+    void set_value_ball_color(QString color);
 
 private slots:
-    void on_spinBox_Radio_valueChanged(int arg1);
 
-    void on_doubleSpinBox_velo_x_2_valueChanged(double arg1);
-    void on_doubleSpinBox_velo_y_2_valueChanged(double arg1);
 private:
     Ui::ChangeBallParamsDlg *ui;
 

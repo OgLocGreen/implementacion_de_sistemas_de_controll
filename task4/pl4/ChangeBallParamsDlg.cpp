@@ -6,6 +6,10 @@ ChangeBallParamsDlg::ChangeBallParamsDlg(QWidget *parent) :
     ui(new Ui::ChangeBallParamsDlg)
 {
     ui->setupUi(this);
+    ui->comboBox_ball_color->setPlaceholderText(QStringLiteral("--Select Color--"));
+    ui->comboBox_board_color->setPlaceholderText(QStringLiteral("--Select Color--"));
+
+
 }
 
 ChangeBallParamsDlg::~ChangeBallParamsDlg()
@@ -43,26 +47,27 @@ void ChangeBallParamsDlg::set_value_radio(int v)
     ui->spinBox_radio->setValue(v);
 }
 
-
-
-void ChangeBallParamsDlg::on_spinBox_Radio_valueChanged(int arg1)
+QString ChangeBallParamsDlg::get_value_board_color()
 {
-    /*
-    if (updateMyBallSpeed)
-    {
-         myBall.set_radio(arg1);
-    }
-    */
+    return ui->comboBox_board_color->currentText();
+}
+
+void ChangeBallParamsDlg::set_value_board_color(QString color)
+{
+    ui->comboBox_board_color->setCurrentText(color);
+}
+
+QString ChangeBallParamsDlg::get_value_ball_color()
+{
+   return ui->comboBox_ball_color->currentText();
+}
+
+void ChangeBallParamsDlg::set_value_ball_color(QString color)
+{
+    ui->comboBox_ball_color->setCurrentText(color);
 }
 
 
-void ChangeBallParamsDlg::on_doubleSpinBox_velo_x_2_valueChanged(double arg1)
-{
 
-}
 
-void ChangeBallParamsDlg::on_doubleSpinBox_velo_y_2_valueChanged(double arg1)
-{
-
-}
 

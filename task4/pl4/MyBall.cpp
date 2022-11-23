@@ -136,7 +136,7 @@ void MyBall::cal_new_postion()
 
 }
 
-void MyBall::set_color(int arg_color)
+QString MyBall::set_color(QString arg_color)
 {
     color_var = arg_color;
 }
@@ -201,3 +201,18 @@ void MyBall::get_velo(double *arg_x, double*arg_y)
     *arg_y = double(velo_y);
 }
 
+void MyBall::set_d(int arg_dx, int arg_dy)
+{
+    dx = arg_dx;
+    dy = arg_dy;
+}
+
+void MyBall::set_dx(int arg_dx)
+{
+    dx = arg_dx;
+}
+
+void MyBall::set_dy(int arg_dy)
+{
+    dy = arg_dy;
+}

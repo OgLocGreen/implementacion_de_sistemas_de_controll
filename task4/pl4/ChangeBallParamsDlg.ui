@@ -71,7 +71,7 @@
     <string>Ball Color</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="comboBox_ball_color">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -82,22 +82,7 @@
    </property>
    <item>
     <property name="text">
-     <string>red</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>blue</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>yellow</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>green</string>
+     <string>white</string>
     </property>
    </item>
    <item>
@@ -107,7 +92,77 @@
    </item>
    <item>
     <property name="text">
-     <string>white</string>
+     <string>cyan</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkCyan</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>red</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkRed</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>magneta</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkMagneta</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>green</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkGreen</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>yellow</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkYellow</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>blue</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkBlue</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>gray</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkGray</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>lightGray</string>
     </property>
    </item>
   </widget>
@@ -136,46 +191,6 @@
    <property name="text">
     <string>Board Color</string>
    </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_2">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>150</y>
-     <width>86</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>red</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>blue</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>yellow</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>green</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>black</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>white</string>
-    </property>
-   </item>
   </widget>
   <widget class="QLabel" name="label_radio_5">
    <property name="geometry">
@@ -209,6 +224,101 @@
      <height>26</height>
     </rect>
    </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_board_color">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>150</y>
+     <width>86</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>white</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>black</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>cyan</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkCyan</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>red</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkRed</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>magneta</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkMagneta</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>green</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkGreen</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>yellow</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkYellow</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>blue</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkBlue</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>gray</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>darkGray</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>lightGray</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>
