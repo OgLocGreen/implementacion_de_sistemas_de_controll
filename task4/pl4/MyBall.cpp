@@ -117,25 +117,22 @@ void MyBall::cal_new_postion()
    }
    */
 
+
+   // calculate new Possiton with Friccion
    x = x+dx*velo_x;
    y = y+dy*velo_y;
-
-   // Also datatype what should i use?
-   // is double long good? cause better to cacluclate small changes or is it to much?
 
    velo_x -= velo_x*friccion;
    velo_y -= velo_y*friccion;
 
-
-   /*
-   if(slow_down_friccion == 10)
+   if (velo_x < 0.1)
    {
-       velo_x -= velo_x*slow_friccion;
-       velo_y -= velo_y*slow_friccion;
-       slow_down_friccion = 0;
+       velo_x = 0;
    }
-   slow_down_friccion +=1;
-   */
+   if (velo_y < 0.1)
+   {
+       velo_y = 0;
+   }
 
 }
 
@@ -172,35 +169,35 @@ int MyBall::get_radio()
 }
 
 
-void MyBall::set_velo(int arg_velo_x, int arg_velo_y)
+void MyBall::set_velo(double arg_velo_x, double arg_velo_y)
 {
     velo_x = arg_velo_x;
     velo_y = arg_velo_y;
 }
 
-void MyBall::set_velo_x(int arg_velo_x)
+void MyBall::set_velo_x(double arg_velo_x)
 {
     velo_x = arg_velo_x;
 }
 
-void MyBall::set_velo_y(int arg_velo_y)
+void MyBall::set_velo_y(double arg_velo_y)
 {
     velo_y = arg_velo_y;
 }
 
-int MyBall::get_velo_x()
+double MyBall::get_velo_x()
 {
-    return int(velo_x);
+    return double(velo_x);
 }
 
-int MyBall::get_velo_y()
+double MyBall::get_velo_y()
 {
-    return int(velo_y);
+    return double(velo_y);
 }
 
-void MyBall::get_velo(int *arg_x, int*arg_y)
+void MyBall::get_velo(double *arg_x, double*arg_y)
 {
-    *arg_x = int(velo_x);
-    *arg_y = int(velo_y);
+    *arg_x = double(velo_x);
+    *arg_y = double(velo_y);
 }
 

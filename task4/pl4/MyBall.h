@@ -18,9 +18,8 @@ private:
     int dx = 1;
     int dy = 1;
 
-    double friccion = 0.0000001;
-    float slow_friccion = 0.001;
-    float slow_down_friccion = 0;
+    double friccion = 0.05;
+
 
     int x_min = 20;
     int x_max = 420;
@@ -45,12 +44,12 @@ public:
     int get_radio();
 
 
-    void set_velo(int arg_velo_x, int arg_velo_y);
-    void set_velo_x(int arg_velo_x);
-    void set_velo_y(int arg_velo_y);
-    int get_velo_x();
-    int get_velo_y();
-    void get_velo(int *arg_x, int*arg_y);
+    void set_velo(double arg_velo_x, double arg_velo_y);
+    void set_velo_x(double arg_velo_x);
+    void set_velo_y(double arg_velo_y);
+    double get_velo_x();
+    double get_velo_y();
+    void get_velo(double *arg_x, double*arg_y);
 
 };
 

@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 private:
      Ui::MainWindow *ui;
-
+    bool updateMyBallSpeed=true;
     bool pausa;
     QTimer myTimer;
     MyBall myBall;
@@ -35,9 +35,9 @@ public:
     QString XmlGetStr(const QString &textXml, const QString &tagXml);
 
 private slots:
-    void on_spinBox_radio_valueChanged(int arg1);
-    void on_spinBox_velo_y_valueChanged(int arg_y);
-    void on_spinBox_velo_x_valueChanged(int arg_x);
+    void on_spinBox_radio_valueChanged(double arg1);
+    void on_doubleSpinBox_velo_y_valueChanged(double arg_y);
+    void on_doubleSpinBox_velo_x_valueChanged(double arg_x);
     void on_checkBox_pausa_clicked();
 
     void OnTimer();
@@ -51,5 +51,8 @@ private slots:
     void on_actionOpen_triggered();
 
     virtual void mousePressEvent(QMouseEvent *event);
+
+    void on_checkBox_reboot_stateChanged(int arg1);
+    void on_checkBox_reboot_clicked();
 };
 #endif // MAINWINDOW_H

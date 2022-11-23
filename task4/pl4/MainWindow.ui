@@ -14,16 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QSpinBox" name="spinBox_velo_x">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>10</y>
-      <width>44</width>
-      <height>26</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QSpinBox" name="spinBox_radio">
     <property name="geometry">
      <rect>
@@ -54,7 +44,7 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>120</y>
+      <y>10</y>
       <width>92</width>
       <height>23</height>
      </rect>
@@ -154,14 +144,37 @@
      <string>Velocidad y: </string>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_velo_y">
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_velo_x">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>110</x>
       <y>50</y>
-      <width>44</width>
+      <width>65</width>
       <height>26</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_velo_y">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>10</y>
+      <width>65</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_reboot">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>50</y>
+      <width>92</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reboot</string>
     </property>
    </widget>
   </widget>

@@ -25,19 +25,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_spinBox_radio_valueChanged(int arg1)
+void MainWindow::on_spinBox_radio_valueChanged(double arg1)
 {
-   myBall.set_radio(arg1);
+   if (updateMyBallSpeed)
+   {
+        myBall.set_radio(arg1);
+   }
 }
 
-void MainWindow::on_spinBox_velo_x_valueChanged(int arg_x)
+void MainWindow::on_doubleSpinBox_velo_x_valueChanged(double arg_x)
 {
-   myBall.set_velo_x(arg_x);
+   if (updateMyBallSpeed)
+   {
+        myBall.set_velo_x(arg_x);
+   }
 }
 
-void MainWindow::on_spinBox_velo_y_valueChanged(int arg_y)
+void MainWindow::on_doubleSpinBox_velo_y_valueChanged(double arg_y)
 {
-   myBall.set_velo_y(arg_y);
+    if (updateMyBallSpeed)
+    {
+        myBall.set_velo_y(arg_y);
+    }
+
 }
 
 void MainWindow::on_checkBox_pausa_clicked()
@@ -57,13 +67,14 @@ void MainWindow::OnTimer()
     {
         myBall.cal_new_postion();
     }
-
     ui->label_x->setText(QString::number(myBall.get_postion_x()));
     ui->label_y->setText(QString::number(myBall.get_postion_y()));
 
+    updateMyBallSpeed=false;
     ui->spinBox_radio->setValue(myBall.get_radio());
-    ui->spinBox_velo_x->setValue(myBall.get_velo_x());
-    ui->spinBox_velo_y->setValue(myBall.get_velo_y());
+    ui->doubleSpinBox_velo_x->setValue(myBall.get_velo_x());
+    ui->doubleSpinBox_velo_y->setValue(myBall.get_velo_y());
+    updateMyBallSpeed=true;
 
     draw_board();
     draw_ball(myBall.get_postion_x(),myBall.get_postion_y());
@@ -71,8 +82,9 @@ void MainWindow::OnTimer()
 
 void MainWindow::draw_ball(int ball_pos_x, int ball_pos_y)
 {
-
+    //QPixmap pixmap(ui->label_board->pixmap());        // issue #2
     QPixmap pixmap(ui->label_board->size());
+
     QPainter painter(&pixmap);
     QPen pen(Qt::DashLine);
     pen.setColor(Qt::green);
@@ -128,16 +140,21 @@ void MainWindow::on_actionChange_Params_triggered()
 
     //dlg.set_value(myBall.get_radio());
     ui->spinBox_radio->setValue(myBall.get_radio());
-    dlg.set_value(myBall.get_radio());   //how to get to the second window?
+    dlg.set_value_radio(myBall.get_radio());
+    dlg.set_value_velo_x(myBall.get_velo_x());
+    dlg.set_value_velo_y(myBall.get_velo_y());
 
     if (dlg.exec() == QDialog::Accepted)
     {
         //dass hier wird in einer zeile gemacht und ohne zwischen speichern
         //dlg.set_value(ui->spinBox_radio_2->value());
 
-        myBall.set_radio(dlg.get_value());
+        myBall.set_radio(dlg.get_value_radio());
         ui->spinBox_radio->setValue(myBall.get_radio());
 
+        myBall.set_velo(dlg.get_value_velo_x(),dlg.get_value_velo_y());
+        ui->doubleSpinBox_velo_x->setValue(myBall.get_velo_x());
+        ui->doubleSpinBox_velo_y->setValue(myBall.get_velo_y());
     }
 }
 
@@ -155,8 +172,8 @@ void MainWindow::on_actionOpen_triggered()
     }
     myBall.set_color(XmlGetStr(arr, "color").toInt());
     myBall.set_radio(XmlGetStr(arr, "radio").toInt());
-    myBall.set_velo_x(XmlGetStr(arr, "velo_x").toInt());
-    myBall.set_velo_y(XmlGetStr(arr, "velo_y").toInt());
+    myBall.set_velo_x(XmlGetStr(arr, "velo_x").toDouble());
+    myBall.set_velo_y(XmlGetStr(arr, "velo_y").toDouble());
     // hier dann die Datenauslesen und an die richtigen stellen übergeben.
     // vlt dann im nachhinein in die eigene klasse OpenFile Übergeben falls zu viel
 
@@ -196,7 +213,6 @@ float MainWindow::conv(int *x, int*y)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-
     //QPoint relPos=event->pos() - ui->centralWidget->pos() - ui->qDrawLabel->pos();
     //QMainWindow::mousePressEvent(event);
 
@@ -204,6 +220,32 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     int y = event->y();
     //QString pos = event->pos();
 
+    int distancia_x = (myBall.get_postion_x() - x);
+    int distancia_y = (myBall.get_postion_y() - y);
+    if(distancia_x<0)
+     {
+            distancia_x *= -1;
+            distancia_y = distancia_y/2;
+     }
+
+
+    if(distancia_y<0)
+     {
+            distancia_y *= -1;
+            distancia_y = distancia_y/2;
+     }
+
+    if(distancia_x > 99)
+    {
+        distancia_x = 99;
+    }
+    if(distancia_y > 99)
+    {
+        distancia_y = 99;
+    }
+
+    myBall.set_velo_x(distancia_x);
+    myBall.set_velo_y(distancia_y);
 }
 
 
@@ -250,3 +292,11 @@ void MainWindow::on_actionOpen_triggered()
 }
 
 */
+
+
+void MainWindow::on_checkBox_reboot_clicked()
+{
+    myBall.set_velo(0,0);
+    myBall.set_postion(220,120);
+}
+
