@@ -1,6 +1,6 @@
 <radio>100</radio>
-<velo_x>5</velo_x>
-<velo_y>5</velo_y>
+<max_velo_x>5</max_velo_x>
+<max_velo_y>5</max_velo_y>
 <color_ball>3</color_ball>
 <color_board>3</color_board>
 

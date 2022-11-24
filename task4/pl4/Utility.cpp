@@ -5,12 +5,6 @@ utility::utility()
 
 }
 
-QString utility::XmlGetField(const QString&text, const QString& tag)
-{
-
-}
-
-
 QString utility::XmlCreateTage(const QString &text, bool is_start_tag)
 {
     QString ret;
@@ -42,12 +36,15 @@ QString utility::XmlGetStr(const QString &textXml, const QString &tagXml)
     return ret;
 }
 
-
 float utility::XmlGetFloat(const QString& textXml,const QString& tag)
 {
     return textXml.mid(GetStart(textXml, tag), GetLen(textXml, tag)).toFloat();
 }
 
+int utility::XmlGetInt(const QString& textXml,const QString& tag)
+{
+    return textXml.mid(GetStart(textXml, tag), GetLen(textXml, tag)).toInt();
+}
 
 QVector<float> utility::XmlGetVector(const QString& xml,const QString& tag)
 {
@@ -66,7 +63,6 @@ QVector<float> utility::XmlGetVector(const QString& xml,const QString& tag)
     }
     return ret;
 }
-
 
 int utility::GetStart(const QString &textXml, const QString &tagXml)
 {
@@ -89,4 +85,30 @@ int utility::GetLen(const QString &textXml, const QString &tagXml)
     lengStr = iend - indexStart;
 
     return lengStr;
+}
+
+
+
+void Log_text(QString text1,QTextStream text2, QString path)
+{
+    QFile file_log(path);    //linux
+
+    if(file_log.open(QIODevice::WriteOnly | QIODevice::Text)) {
+
+        // issue #5
+        // only possible to write "Sting like this"
+        // not as QStream
+
+        file_log.write("text blablabla"); // this works
+        //file_log.write(text1);            // this doesn´t
+
+
+        // writing a Stream of Text
+        // Again just works with "text like that"
+        QTextStream out(&file_log);
+
+        out << "text balablalbla"; //this works
+        // out << text2;            // this doesn´t
+    }
+    file_log.close();
 }

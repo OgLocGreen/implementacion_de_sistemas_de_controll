@@ -81,7 +81,7 @@ void MainWindow::OnTimer()
 
 void MainWindow::draw_ball(int ball_pos_x, int ball_pos_y)
 {
-    //QPixmap pixmap(ui->label_board->pixmap());        // issue #2
+    //QPixmap pixmap(*ui->label_board->pixmap());        // issue #2
     QPixmap pixmap(ui->label_board->size());
 
     QPainter painter(&pixmap);
@@ -104,6 +104,8 @@ void MainWindow::draw_board()
     int board_wide = 440;
     int board_hide = 240;
 
+
+    /*   // issue #4
     int array = {{{20,20},{30,20},{40,20}},
                   {{20,60},{30,60},{40,60}}
                 };
@@ -111,6 +113,7 @@ void MainWindow::draw_board()
     int array = [[[20,20}],[30,20],[40,20]],
                   [[20,60],[30,60],[40,60]]
                 ];
+    */
 
     // painter.drawRect(x,y, w, h);
 
