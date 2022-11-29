@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     ChangeBallParamsDlg.cpp \
+    Log.cpp \
     MyBall.cpp \
     OpenFile.cpp \
     Utility.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     ChangeBallParamsDlg.h \
+    Log.h \
     MainWindow.h \
     MyBall.h \
     OpenFile.h \
@@ -33,4 +35,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    data
+    data \
+    log_file

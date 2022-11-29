@@ -9,6 +9,8 @@
 #include <QFileDialog>
 #include "MyBall.h"
 #include "OpenFile.h"
+#include "Utility.h"
+#include <Log.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,7 +28,14 @@ private:
     OpenFile myFile;
     int mouse_x;
     int mouse_y;
-     QString board_color = "darkGreen";
+    QColor board_color = "darkGreen";
+
+    Utility myUtilityManager;
+
+    QString log_path = "./log_file.txt";  // #7
+    Log myLogger;
+
+    Utility myUtiliy;
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -36,15 +45,14 @@ public:
     QString XmlGetStr(const QString &textXml, const QString &tagXml);
 
 private slots:
-    void on_spinBox_radio_valueChanged(double arg1);
+    void on_spinBox_radio_valueChanged(int arg1);
     void on_doubleSpinBox_velo_y_valueChanged(double arg_y);
     void on_doubleSpinBox_velo_x_valueChanged(double arg_x);
     void on_checkBox_pausa_clicked();
 
     void OnTimer();
 
-    void draw_board();
-    void draw_ball(int ball_pos_x, int ball_pos_y);
+    void draw();
     float conv(int *x, int *y);
 
 

@@ -7,11 +7,13 @@
 #include <QVector>
 #include <QFile>
 #include <QTextStream>
+#include <QDateTime>
 
-class utility
-{
+
+class Utility
+{    
 public:
-    utility();
+    Utility();
 
     // Get_XML
     int XmlGetInt(const QString& textXml,const QString& tag);
@@ -29,8 +31,11 @@ public:
 
 
     // Log_File
-    void Log_text(QString text, QString path);
+    void Log_text_string(QString text1, QString path);
+    void Log_text_stream(QTextStream text1, QString path);
 
+    void setDatosLog(QString log_msg, QString log_path);
+    void OnAddToLog(const QString& NewDataLogIn,QString log_path);
 };
 
 #endif // UTILITY_H

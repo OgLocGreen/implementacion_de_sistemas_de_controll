@@ -136,25 +136,14 @@ void MyBall::cal_new_postion()
 
 }
 
-QString MyBall::set_color(QString arg_color)
+void MyBall::set_color(QColor arg_color)
 {
     color_var = arg_color;
 }
 
-QString MyBall::get_color()
+QColor MyBall::get_color()
 {
-    /*
-    switch(color_var) {
-      case "darkGreen":
-        return Qt::darkGreen;
-      case "red":
-        return Qt::red;
-      case "blue":
-        return Qt::blue;
-      default:
-        return Qt::darkGreengreen;
-    }
-    */
+    return color_var;
 }
 
 

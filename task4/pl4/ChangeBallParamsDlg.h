@@ -2,6 +2,8 @@
 #define CHANGEBALLPARAMSDLG_H
 
 #include <QDialog>
+#include <QColorDialog>
+
 
 namespace Ui {
 class ChangeBallParamsDlg;
@@ -12,6 +14,11 @@ class ChangeBallParamsDlg : public QDialog
     Q_OBJECT
 private:
     int radio;
+    QColorDialog BallDialog;
+    QColorDialog BoardDialog;
+
+    QColor ball_color;
+    QColor board_color;
 
 public:
     explicit ChangeBallParamsDlg(QWidget *parent = nullptr);
@@ -31,7 +38,14 @@ public:
     QString get_value_ball_color();
     void set_value_ball_color(QString color);
 
+    QColor get_value_ball_color_dialog();
+
+    QColor get_value_board_color_dialog();
+
 private slots:
+
+    void on_pushButton_ball_color_clicked();
+    void on_pushButton_board_color_clicked();
 
 private:
     Ui::ChangeBallParamsDlg *ui;

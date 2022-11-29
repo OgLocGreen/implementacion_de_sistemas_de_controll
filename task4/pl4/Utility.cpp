@@ -1,11 +1,12 @@
 #include "Utility.h"
+using namespace std;
 
-utility::utility()
+Utility::Utility()
 {
 
 }
 
-QString utility::XmlCreateTage(const QString &text, bool is_start_tag)
+QString Utility::XmlCreateTage(const QString &text, bool is_start_tag)
 {
     QString ret;
 
@@ -20,7 +21,7 @@ QString utility::XmlCreateTage(const QString &text, bool is_start_tag)
     return ret;
 }
 
-QString utility::XmlGetStr(const QString &textXml, const QString &tagXml)
+QString Utility::XmlGetStr(const QString &textXml, const QString &tagXml)
 {
     QString ret;
     int istart, iend;
@@ -36,17 +37,20 @@ QString utility::XmlGetStr(const QString &textXml, const QString &tagXml)
     return ret;
 }
 
-float utility::XmlGetFloat(const QString& textXml,const QString& tag)
+
+
+
+float Utility::XmlGetFloat(const QString& textXml,const QString& tag)
 {
     return textXml.mid(GetStart(textXml, tag), GetLen(textXml, tag)).toFloat();
 }
 
-int utility::XmlGetInt(const QString& textXml,const QString& tag)
+int Utility::XmlGetInt(const QString& textXml,const QString& tag)
 {
     return textXml.mid(GetStart(textXml, tag), GetLen(textXml, tag)).toInt();
 }
 
-QVector<float> utility::XmlGetVector(const QString& xml,const QString& tag)
+QVector<float> Utility::XmlGetVector(const QString& xml,const QString& tag)
 {
     QVector<float> ret;
     QString constens = XmlGetStr(xml, tag).trimmed();
@@ -64,7 +68,7 @@ QVector<float> utility::XmlGetVector(const QString& xml,const QString& tag)
     return ret;
 }
 
-int utility::GetStart(const QString &textXml, const QString &tagXml)
+int Utility::GetStart(const QString &textXml, const QString &tagXml)
 {
     int istart;
 
@@ -73,7 +77,7 @@ int utility::GetStart(const QString &textXml, const QString &tagXml)
     return istart;
 }
 
-int utility::GetLen(const QString &textXml, const QString &tagXml)
+int Utility::GetLen(const QString &textXml, const QString &tagXml)
 {
     int istart, iend;
     int indexStart, lengStr;
@@ -89,26 +93,62 @@ int utility::GetLen(const QString &textXml, const QString &tagXml)
 
 
 
-void Log_text(QString text1,QTextStream text2, QString path)
+void Utility::Log_text_string(QString text1, QString path)
 {
     QFile file_log(path);    //linux
 
     if(file_log.open(QIODevice::WriteOnly | QIODevice::Text)) {
 
-        // issue #5
-        // only possible to write "Sting like this"
-        // not as QStream
-
         file_log.write("text blablabla"); // this works
-        //file_log.write(text1);            // this doesn´t
+        file_log.write(text1.toLatin1() + "\n");            // this doesn´t
 
-
-        // writing a Stream of Text
-        // Again just works with "text like that"
-        QTextStream out(&file_log);
-
-        out << "text balablalbla"; //this works
-        // out << text2;            // this doesn´t
     }
     file_log.close();
 }
+
+void Utility::Log_text_stream(QTextStream text1, QString path)
+{
+    QFile file_log(path);    //linux
+    // writing a Stream of Text
+    // Again just works with "text like that"
+    QTextStream out(&file_log);
+
+    out << "text balablalbla"; //this works
+    //out << to_string(text1);            // this doesn´t
+}
+
+
+
+void setDatosLog(QString log_msg,QString log_path)
+{
+    QString lastlog;
+
+    QFile log(log_path);
+
+    if (log.open(QIODevice::ReadOnly)){
+        QTextStream leer(&log);
+        lastlog.append(leer.readAll());
+        log.close();
+    }
+    if (log.open(QIODevice::WriteOnly)){
+        QTextStream escribir(&log);
+        escribir<<lastlog;
+        escribir<<log_msg;
+        log.close();
+    }
+}
+
+void OnAddToLog(const QString& NewDataLogIn,QString log_path)
+
+{
+    QString NewDataLog;
+    NewDataLog.append(QDateTime::currentDateTime().toString("hh.mm.ss"));
+    NewDataLog.append(" ");
+    NewDataLog.append(QDate::currentDate().toString());
+    NewDataLog.append(" ");
+    NewDataLog.append(NewDataLogIn);
+    NewDataLog.append("\r\n");
+    setDatosLog(NewDataLog, log_path);
+
+}
+

@@ -2,7 +2,9 @@
 #include "ui_ChangeBallParamsDlg.h"
 #include "ui_MainWindow.h"
 #include "ChangeBallParamsDlg.h"
-#include<QDebug>
+
+#include <Utility.h>
+#include <QDebug>
 
 #include <QMouseEvent>
 
@@ -15,7 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
     timer->start(100);
-    MyBall myBall;
+    myLogger.set_log_path(log_path); // issue #7 #TODO
+                                       // I know thats not good but does it matter?
+                                       // Why should i not use it as Public Var;
+
 
 }
 
@@ -24,7 +29,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_spinBox_radio_valueChanged(double arg1)
+void MainWindow::on_spinBox_radio_valueChanged(int arg1)
 {
    if (updateMyBallSpeed)
    {
@@ -75,26 +80,12 @@ void MainWindow::OnTimer()
     ui->doubleSpinBox_velo_y->setValue(myBall.get_velo_y());
     updateMyBallSpeed=true;
 
-    draw_board();
-    draw_ball(myBall.get_postion_x(),myBall.get_postion_y());
+   draw();
 }
 
-void MainWindow::draw_ball(int ball_pos_x, int ball_pos_y)
-{
-    //QPixmap pixmap(*ui->label_board->pixmap());        // issue #2
-    QPixmap pixmap(ui->label_board->size());
 
-    QPainter painter(&pixmap);
-    QPen pen(Qt::DashLine);
-    pen.setColor(Qt::green);
-    pen.setWidth(3);
-    painter.setPen(pen);
-    painter.setBrush(Qt::black);
-    painter.drawEllipse(QPoint(ball_pos_x,ball_pos_y), myBall.get_radio(),myBall.get_radio());
-    ui->label_board->setPixmap(pixmap);
-}
 
-void MainWindow::draw_board()
+void MainWindow::draw()
 {
     QPixmap pixmap(ui->label_board->size());
     QPainter painter(&pixmap);
@@ -104,20 +95,13 @@ void MainWindow::draw_board()
     int board_wide = 440;
     int board_hide = 240;
 
-
-    /*   // issue #4
-    int array = {{{20,20},{30,20},{40,20}},
-                  {{20,60},{30,60},{40,60}}
-                };
-
-    int array = [[[20,20}],[30,20],[40,20]],
-                  [[20,60],[30,60],[40,60]]
-                ];
-    */
+    // issue #4
+    //int holes[3][3][2];
+    //holes[][][0] = [[1,2,3],[1,2,3]];
 
     // painter.drawRect(x,y, w, h);
 
-    painter.setBrush( Qt::darkGreen);
+    painter.setBrush(board_color);
     painter.drawRect(0,0, board_wide, board_hide);
 
     painter.setBrush(Qt::darkYellow);
@@ -134,12 +118,17 @@ void MainWindow::draw_board()
     painter.drawEllipse(QPoint(0,board_hide),board_hole_radius,board_hole_radius);
     painter.drawEllipse(QPoint(board_hide- board_wall_wide,board_hide),int(board_hole_radius*0.75),int(board_hole_radius*0.75));
     painter.drawEllipse(QPoint(board_wide,board_hide),board_hole_radius,board_hole_radius);
-
-
     //pen.setColor(Qt::yellow);
     //painter.setPen(pen);
     //painter.drawText(20,30, "Prueba");
 
+    ui->label_board->setPixmap(pixmap);
+    QPen pen(Qt::DashLine);
+    pen.setColor(Qt::green);
+    pen.setWidth(3);
+    painter.setPen(pen);
+    painter.setBrush(myBall.get_color()); // hier farbe myBall.get_color();
+    painter.drawEllipse(QPoint(myBall.get_postion_x(),myBall.get_postion_y()), myBall.get_radio(),myBall.get_radio());
     ui->label_board->setPixmap(pixmap);
 }
 
@@ -153,25 +142,46 @@ void MainWindow::on_actionChange_Params_triggered()
     dlg.set_value_radio(myBall.get_radio());
     dlg.set_value_velo_x(myBall.get_velo_x());
     dlg.set_value_velo_y(myBall.get_velo_y());
-    dlg.set_value_ball_color(myBall.get_color());
-    dlg.set_value_board_color(board_color);
+
+    // issue #6
+    //dlg.set_value_ball_color(myBall.get_color());
+    //dlg.set_value_board_color(board_color);
+
+
 
     if (dlg.exec() == QDialog::Accepted)
     {
-        //dass hier wird in einer zeile gemacht und ohne zwischen speichern
-        //dlg.set_value(ui->spinBox_radio_2->value());
-
+        QString log_msg = "New Params: ";
         myBall.set_radio(dlg.get_value_radio());
+        log_msg.append("Radio ");
+        log_msg.append(QString::number(dlg.get_value_radio()));
+        log_msg.append(", ");
         ui->spinBox_radio->setValue(myBall.get_radio());
 
         myBall.set_velo(dlg.get_value_velo_x(),dlg.get_value_velo_y());
+        log_msg.append("velo_x ");
+        log_msg.append( QString::number(dlg.get_value_velo_x()));
+        log_msg.append(", ");
+
+        log_msg.append("velo_y ");
+        log_msg.append( QString::number(dlg.get_value_velo_y()));
+        log_msg.append(", ");
         ui->doubleSpinBox_velo_x->setValue(myBall.get_velo_x());
         ui->doubleSpinBox_velo_y->setValue(myBall.get_velo_y());
 
-        myBall.set_color(dlg.get_value_ball_color());
-        board_color = dlg.get_value_board_color();
+        myBall.set_color(dlg.get_value_ball_color_dialog());
+        log_msg.append("Color Ball ");
+        log_msg.append(dlg.get_value_board_color_dialog().name());
+        log_msg.append(", ");
+        board_color = dlg.get_value_board_color_dialog();
+        log_msg.append("Color Board ");
+        log_msg.append(dlg.get_value_board_color_dialog().name());
+        log_msg.append("\n");
+        myLogger.OnAddToLog(log_msg);
 
     }
+
+
 }
 
 
@@ -189,32 +199,12 @@ void MainWindow::on_actionOpen_triggered()
 
     // myBall.set_color(XmlGetStr(arr, "color").toQString()); Change into QSting
 
-    myBall.set_radio(XmlGetStr(arr, "radio").toInt());
-    myBall.set_velo_x(XmlGetStr(arr, "velo_x").toDouble());
-    myBall.set_velo_y(XmlGetStr(arr, "velo_y").toDouble());
+    myBall.set_radio(myUtiliy.XmlGetStr(arr, "radio").toInt());
+    myBall.set_velo_x(myUtiliy.XmlGetStr(arr, "velo_x").toDouble());
+    myBall.set_velo_y(myUtiliy.XmlGetStr(arr, "velo_y").toDouble());
     // hier dann die Datenauslesen und an die richtigen stellen übergeben.
     // vlt dann im nachhinein in die eigene klasse OpenFile Übergeben falls zu viel
 
-}
-
-
-QString MainWindow::XmlGetStr(const QString &textXml, const QString &tagXml)
-{
-       // This one into Utiliy
-    // no need to Programm it twice
-
-    QString ret;
-    int istart, iend;
-    int indexStart, lengStr;
-
-
-    istart = textXml.indexOf("<"+tagXml+">");
-    iend = textXml.indexOf("</"+tagXml+">");
-    indexStart = istart+tagXml.length()+2;
-    lengStr = iend - indexStart;
-    ret = textXml.mid(indexStart, lengStr);
-
-    return ret;
 }
 
 
@@ -330,4 +320,6 @@ void MainWindow::on_checkBox_reboot_clicked()
     myBall.set_velo(0,0);
     myBall.set_postion(220,120);
 }
+
+
 

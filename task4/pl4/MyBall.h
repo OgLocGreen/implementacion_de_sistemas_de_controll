@@ -2,6 +2,7 @@
 #define MYBALL_H
 
 #include <QString>
+#include <QColor>
 
 class MyBall
 {
@@ -12,18 +13,17 @@ private:
     double velo_x = 0;
     double velo_y = 0;
     int radio = 25;
-    QString color_var = "darkGreen";
+    QColor color_var = "black";
     double x = 220;
     double y = 120;
     int dx = 1;
     int dy = 1;
 
+
+
     double friccion = 0.05;
-
-
     int x_min = 20;
     int x_max = 420;
-
     int y_min = 20;
     int y_max = 220;
 
@@ -35,8 +35,8 @@ public:
     void cal_new_postion();
     bool check_rand();
 
-    QString set_color(QString arg_color);
-    QString get_color();
+    void set_color(QColor arg_color);
+    QColor get_color();
 
     void set_radio(float arg_radio);
     int get_radio();
@@ -52,6 +52,8 @@ public:
    void set_d(int arg_dx, int arg_dy);
    void set_dx(int arg_dx);
    void set_dy(int arg_dy);
+
+
 
 };
 
