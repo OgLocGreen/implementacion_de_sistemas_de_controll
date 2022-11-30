@@ -5,10 +5,10 @@ MyBall::MyBall()
 
 }
 
-MyBall::MyBall(int init_x, int init_y, int init_color, int init_radio, int init_velo_x, int init_velo_y)
+MyBall::MyBall(int init_x, int init_y, int init_color,int init_radio, int init_max_velo_x, int init_max_velo_y)
 {
-    velo_x = init_velo_x;
-    velo_y = init_velo_y;
+    max_velo_x = init_max_velo_x;
+    max_velo_y = init_max_velo_y;
     radio = init_radio;
     x = init_x;
     y = init_y;
@@ -158,6 +158,39 @@ int MyBall::get_radio()
 }
 
 
+void MyBall::set_max_velo(double arg_max_velo_x, double arg_max_velo_y)
+{
+    max_velo_x = arg_max_velo_x;
+    max_velo_y = arg_max_velo_y;
+}
+
+void MyBall::set_max_velo_x(double arg_max_velo_x)
+{
+    max_velo_x = arg_max_velo_x;
+}
+
+void MyBall::set_max_velo_y(double arg_max_velo_y)
+{
+    max_velo_y = arg_max_velo_y;
+}
+
+double MyBall::get_max_velo_x()
+{
+    return double(max_velo_x);
+}
+
+double MyBall::get_max_velo_y()
+{
+    return double(max_velo_y);
+}
+
+void MyBall::get_max_velo(double *max_arg_x, double*max_arg_y)
+{
+    *max_arg_x = double(max_velo_x);
+    *max_arg_y = double(max_velo_y);
+}
+
+
 void MyBall::set_velo(double arg_velo_x, double arg_velo_y)
 {
     velo_x = arg_velo_x;
@@ -189,6 +222,7 @@ void MyBall::get_velo(double *arg_x, double*arg_y)
     *arg_x = double(velo_x);
     *arg_y = double(velo_y);
 }
+
 
 void MyBall::set_d(int arg_dx, int arg_dy)
 {

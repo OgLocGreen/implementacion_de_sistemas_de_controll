@@ -20,7 +20,19 @@ MainWindow::MainWindow(QWidget *parent)
     myLogger.set_log_path(log_path); // issue #7 #TODO
                                        // I know thats not good but does it matter?
                                        // Why should i not use it as Public Var;
+    myUtiliy.set_xml_path(xml_path);
 
+    QString xml = myUtiliy.ReadXml();
+    QString xml_ball = myUtiliy.GetXmlStr(xml, "Ball");
+
+
+    myBall.set_radio(myUtiliy.GetXmlStr(xml_ball, "radio").toInt());
+    myBall.set_max_velo_x(myUtiliy.GetXmlStr(xml_ball, "max_velo_x").toDouble());
+    myBall.set_max_velo_y(myUtiliy.GetXmlStr(xml_ball, "max_velo_y").toDouble());
+    myBall.set_color(QColor(myUtiliy.GetXmlStr(xml_ball, "color_ball")));
+
+    QString xml_board = myUtiliy.GetXmlStr(xml, "Board");
+    board_color = QColor(myUtiliy.GetXmlStr(xml_board, "color_board"));
 
 }
 
@@ -127,7 +139,7 @@ void MainWindow::draw()
     pen.setColor(Qt::green);
     pen.setWidth(3);
     painter.setPen(pen);
-    painter.setBrush(myBall.get_color()); // hier farbe myBall.get_color();
+    painter.setBrush(myBall.get_color());
     painter.drawEllipse(QPoint(myBall.get_postion_x(),myBall.get_postion_y()), myBall.get_radio(),myBall.get_radio());
     ui->label_board->setPixmap(pixmap);
 }
@@ -140,12 +152,12 @@ void MainWindow::on_actionChange_Params_triggered()
     //dlg.set_value(myBall.get_radio());
     ui->spinBox_radio->setValue(myBall.get_radio());
     dlg.set_value_radio(myBall.get_radio());
-    dlg.set_value_velo_x(myBall.get_velo_x());
-    dlg.set_value_velo_y(myBall.get_velo_y());
+    dlg.set_max_value_velo_x(myBall.get_velo_x());
+    dlg.set_max_value_velo_y(myBall.get_velo_y());
 
     // issue #6
-    //dlg.set_value_ball_color(myBall.get_color());
-    //dlg.set_value_board_color(board_color);
+    dlg.set_value_ball_color(myBall.get_color());
+    dlg.set_value_board_color(board_color);
 
 
 
@@ -158,13 +170,13 @@ void MainWindow::on_actionChange_Params_triggered()
         log_msg.append(", ");
         ui->spinBox_radio->setValue(myBall.get_radio());
 
-        myBall.set_velo(dlg.get_value_velo_x(),dlg.get_value_velo_y());
+        myBall.set_velo(dlg.get_max_value_velo_x(),dlg.get_max_value_velo_y());
         log_msg.append("velo_x ");
-        log_msg.append( QString::number(dlg.get_value_velo_x()));
+        log_msg.append( QString::number(dlg.get_max_value_velo_x()));
         log_msg.append(", ");
 
         log_msg.append("velo_y ");
-        log_msg.append( QString::number(dlg.get_value_velo_y()));
+        log_msg.append( QString::number(dlg.get_max_value_velo_y()));
         log_msg.append(", ");
         ui->doubleSpinBox_velo_x->setValue(myBall.get_velo_x());
         ui->doubleSpinBox_velo_y->setValue(myBall.get_velo_y());
@@ -180,10 +192,7 @@ void MainWindow::on_actionChange_Params_triggered()
         myLogger.OnAddToLog(log_msg);
 
     }
-
-
 }
-
 
 
 void MainWindow::on_actionOpen_triggered()
@@ -197,14 +206,9 @@ void MainWindow::on_actionOpen_triggered()
     file.close();
     }
 
-    // myBall.set_color(XmlGetStr(arr, "color").toQString()); Change into QSting
-
-    myBall.set_radio(myUtiliy.XmlGetStr(arr, "radio").toInt());
-    myBall.set_velo_x(myUtiliy.XmlGetStr(arr, "velo_x").toDouble());
-    myBall.set_velo_y(myUtiliy.XmlGetStr(arr, "velo_y").toDouble());
-    // hier dann die Datenauslesen und an die richtigen stellen übergeben.
-    // vlt dann im nachhinein in die eigene klasse OpenFile Übergeben falls zu viel
-
+    myBall.set_radio(myUtiliy.GetXmlStr(arr, "radio").toInt());
+    myBall.set_velo_x(myUtiliy.GetXmlStr(arr, "velo_x").toDouble());
+    myBall.set_velo_y(myUtiliy.GetXmlStr(arr, "velo_y").toDouble());
 }
 
 
@@ -268,52 +272,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     myBall.set_velo_x(distancia_x);
     myBall.set_velo_y(distancia_y);
 }
-
-
-
-
-
-
-
-/*
-void MainWindow::on_actionChange_Params_triggered()
-{
-    ChangeBallParamsDlg dlg;
-    dlg.set_value(radio);
-    int result = dlg.exec();
-
-    if (result ==QDialog::Accepted)
-    {
-        radio = dlg.get_value();
-        ui->spinBox_radio->set_value(radio*2);
-    }
-}
-
-
-void MainWindow::on_actionOpen_triggered()
-{
-    QFileDialog dlg;
-    dlg.setLoQueSea(...);
-
-    if(dlg.exec() == QDialog::Accepted)
-    {
-        QString filenmae )
-    }
-
-    QString result = QFileDialog::getOpenFileName(this,"Seleccione archvo de Datos", "/Path/to/file/");
-    if(! result.isEmpty())
-    {^
-            QFile fid(result);
-            if(fid.open(QIODevice::ReadOnly()))
-            {
-                int datio =QString(fid.readAll().toInt());
-                ui->qNumA_spinbox->set_value(dato);
-             }
-}
-}
-
-*/
-
 
 void MainWindow::on_checkBox_reboot_clicked()
 {

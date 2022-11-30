@@ -4,6 +4,11 @@ Log::Log()
 {
 }
 
+Log::Log(QString path)
+{
+    log_file_path = path;
+}
+
 void Log::setDatosLog(QString log_msg)
 {
     QString lastlog;

@@ -35,5 +35,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    data \
-    log_file
+    log_file \
+    xml_file

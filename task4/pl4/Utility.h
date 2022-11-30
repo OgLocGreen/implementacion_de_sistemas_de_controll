@@ -12,30 +12,40 @@
 
 class Utility
 {    
+private:
+    QString xml_file_path;
+
 public:
     Utility();
 
-    // Get_XML
-    int XmlGetInt(const QString& textXml,const QString& tag);
-    float XmlGetFloat(const QString& textXml,const QString& tag);
-    QVector<float> XmlGetVector(const QString& xml,const QString& tag);
+    void set_xml_path(QString path);
 
-    void XmlGetAll(const QString& textXml, const QString& tag);
+    // Get_XML
+    int GetXmlInt(const QString& textXml,const QString& tag);
+    float GetXmlFloat(const QString& textXml,const QString& tag);
+    QVector<float> GetXmlVector(const QString& xml,const QString& tag);
+    QString GetXmlTag(const QString& text);
+    QString GetXmlStr(const QString& text, const QString& tag);
 
     //Set_XML
-
     int GetLen(const QString &textXml, const QString &tagXml);
     int GetStart(const QString &textXml, const QString &tagXml);
-    QString XmlCreateTage(const QString& text, bool is_start_tag);
-    QString XmlGetStr(const QString& text, const QString& tag);
+    QString XmlCreateTag(const QString& text, bool is_start_tag);
 
 
-    // Log_File
+
+    // XML_File
+    QString ReadXml();
+    QString ReadXml(QString xml_path);
+    int WriteXml(QString xml_msg);
+    int WriteXml(QString xml_msg, QString xml_path); // return 1 wenn all good
+    int AppenedToXml(QString xml_msg);
+    int AppenedToXml(QString xml_msg,QString xml_path);
+
+    // Log_File // reserve
     void Log_text_string(QString text1, QString path);
     void Log_text_stream(QTextStream text1, QString path);
 
-    void setDatosLog(QString log_msg, QString log_path);
-    void OnAddToLog(const QString& NewDataLogIn,QString log_path);
 };
 
 #endif // UTILITY_H

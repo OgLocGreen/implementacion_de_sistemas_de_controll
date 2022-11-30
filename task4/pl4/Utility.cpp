@@ -6,7 +6,13 @@ Utility::Utility()
 
 }
 
-QString Utility::XmlCreateTage(const QString &text, bool is_start_tag)
+void Utility::set_xml_path(QString path)
+{
+    xml_file_path = path;
+}
+
+
+QString Utility::XmlCreateTag(const QString &text, bool is_start_tag)
 {
     QString ret;
 
@@ -21,7 +27,7 @@ QString Utility::XmlCreateTage(const QString &text, bool is_start_tag)
     return ret;
 }
 
-QString Utility::XmlGetStr(const QString &textXml, const QString &tagXml)
+QString Utility::GetXmlStr(const QString &textXml, const QString &tagXml)
 {
     QString ret;
     int istart, iend;
@@ -40,20 +46,20 @@ QString Utility::XmlGetStr(const QString &textXml, const QString &tagXml)
 
 
 
-float Utility::XmlGetFloat(const QString& textXml,const QString& tag)
+float Utility::GetXmlFloat(const QString& textXml,const QString& tag)
 {
     return textXml.mid(GetStart(textXml, tag), GetLen(textXml, tag)).toFloat();
 }
 
-int Utility::XmlGetInt(const QString& textXml,const QString& tag)
+int Utility::GetXmlInt(const QString& textXml,const QString& tag)
 {
     return textXml.mid(GetStart(textXml, tag), GetLen(textXml, tag)).toInt();
 }
 
-QVector<float> Utility::XmlGetVector(const QString& xml,const QString& tag)
+QVector<float> Utility::GetXmlVector(const QString& xml,const QString& tag)
 {
     QVector<float> ret;
-    QString constens = XmlGetStr(xml, tag).trimmed();
+    QString constens = GetXmlStr(xml, tag).trimmed();
 
     if (constens.startsWith("[") && constens.endsWith("]"))
     {
@@ -66,6 +72,12 @@ QVector<float> Utility::XmlGetVector(const QString& xml,const QString& tag)
             }
     }
     return ret;
+}
+
+QString Utility::GetXmlTag(const QString &text)
+{
+    int end_tag = text.indexOf(">");
+    return text.mid(2,end_tag);
 }
 
 int Utility::GetStart(const QString &textXml, const QString &tagXml)
@@ -92,19 +104,173 @@ int Utility::GetLen(const QString &textXml, const QString &tagXml)
 }
 
 
+QString Utility::ReadXml()
+{
+    QString xml_data;
+    QFile xml_file(xml_file_path);
+
+    if (xml_file.open(QIODevice::ReadOnly)){
+        QTextStream leer(&xml_file);
+        xml_data.append(leer.readAll());
+        xml_file.close();
+    }
+    return xml_data;
+}
+
+
+QString Utility::ReadXml(QString xml_path)
+{
+    QString xml_data;
+    QFile xml_file(xml_path);
+
+    if (xml_file.open(QIODevice::ReadOnly)){
+        QTextStream leer(&xml_file);
+        xml_data.append(leer.readAll());
+        xml_file.close();
+    }
+    return xml_data;
+}
+
+
+int Utility::WriteXml(QString xml_msg)
+{
+    QFile xml_file(xml_file_path);
+    try
+    {
+        if (xml_file.open(QIODevice::WriteOnly)){
+            QTextStream escribir(&xml_msg);
+            escribir<<xml_msg;
+            xml_file.close();
+            return 0;
+        }
+        else
+        {
+            throw -1;
+        }
+
+    }
+    catch (int error)
+    {
+        return error;
+    }
+}
+
+int Utility::WriteXml(QString xml_msg, QString xml_path)
+{
+    QFile xml_file(xml_path);
+    try
+    {
+        if (xml_file.open(QIODevice::WriteOnly)){
+            QTextStream escribir(&xml_msg);
+            escribir<<xml_msg;
+            xml_file.close();
+            return 0;
+        }
+        else
+        {
+            throw -1;
+        }
+
+    }
+    catch (int error)
+    {
+        return error;
+    }
+}
+
+
+
+int Utility::AppenedToXml(QString xml_msg)
+{
+    QString lastlog;
+
+    QFile log(xml_file_path);
+
+
+    try
+    {
+        if (log.open(QIODevice::ReadOnly)){
+            QTextStream leer(&log);
+            lastlog.append(leer.readAll());
+            log.close();
+            if (log.open(QIODevice::WriteOnly)){
+                QTextStream escribir(&log);
+                escribir<<lastlog;
+                escribir<<xml_msg;
+                log.close();
+            }
+            else
+            {
+                throw -2;
+            }
+            return 0;
+        }
+        else
+        {
+            throw -1;
+        }
+
+    }
+    catch (int error)
+    {
+        return error;
+    }
+
+}
+
+
+int Utility::AppenedToXml(QString xml_msg,QString xml_path)
+{
+    QString lastxml;
+
+    QFile log(xml_path);
+    try
+    {
+        if (log.open(QIODevice::ReadOnly)){
+            QTextStream leer(&log);
+            lastxml.append(leer.readAll());
+            log.close();
+            if (log.open(QIODevice::WriteOnly)){
+                QTextStream escribir(&log);
+                escribir<<lastxml;
+                escribir<<xml_msg;
+                log.close();
+            }
+            else
+            {
+                throw -2;
+            }
+            return 0;
+        }
+        else
+        {
+            throw -1;
+        }
+
+    }
+    catch(int error)
+    {
+        return error;
+    }
+
+}
+
+
+
+
+
+
 
 void Utility::Log_text_string(QString text1, QString path)
 {
     QFile file_log(path);    //linux
 
     if(file_log.open(QIODevice::WriteOnly | QIODevice::Text)) {
-
-        file_log.write("text blablabla"); // this works
-        file_log.write(text1.toLatin1() + "\n");            // this doesn´t
-
+        file_log.write(text1.toLatin1() + "\n");
     }
     file_log.close();
 }
+
 
 void Utility::Log_text_stream(QTextStream text1, QString path)
 {
@@ -115,40 +281,5 @@ void Utility::Log_text_stream(QTextStream text1, QString path)
 
     out << "text balablalbla"; //this works
     //out << to_string(text1);            // this doesn´t
-}
-
-
-
-void setDatosLog(QString log_msg,QString log_path)
-{
-    QString lastlog;
-
-    QFile log(log_path);
-
-    if (log.open(QIODevice::ReadOnly)){
-        QTextStream leer(&log);
-        lastlog.append(leer.readAll());
-        log.close();
-    }
-    if (log.open(QIODevice::WriteOnly)){
-        QTextStream escribir(&log);
-        escribir<<lastlog;
-        escribir<<log_msg;
-        log.close();
-    }
-}
-
-void OnAddToLog(const QString& NewDataLogIn,QString log_path)
-
-{
-    QString NewDataLog;
-    NewDataLog.append(QDateTime::currentDateTime().toString("hh.mm.ss"));
-    NewDataLog.append(" ");
-    NewDataLog.append(QDate::currentDate().toString());
-    NewDataLog.append(" ");
-    NewDataLog.append(NewDataLogIn);
-    NewDataLog.append("\r\n");
-    setDatosLog(NewDataLog, log_path);
-
 }
 

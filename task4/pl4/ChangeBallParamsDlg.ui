@@ -76,12 +76,12 @@
     <rect>
      <x>20</x>
      <y>50</y>
-     <width>61</width>
+     <width>91</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Speed x</string>
+    <string>Max Speed x</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_radio_4">
@@ -102,15 +102,15 @@
     <rect>
      <x>20</x>
      <y>80</y>
-     <width>61</width>
+     <width>91</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Speed y</string>
+    <string>Max Speed y</string>
    </property>
   </widget>
-  <widget class="QDoubleSpinBox" name="doubleSpinBox_velo_x_2">
+  <widget class="QDoubleSpinBox" name="doubleSpinBox_max_velo_x_2">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -120,7 +120,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QDoubleSpinBox" name="doubleSpinBox_velo_y_2">
+  <widget class="QDoubleSpinBox" name="doubleSpinBox_max_velo_y_2">
    <property name="geometry">
     <rect>
      <x>130</x>

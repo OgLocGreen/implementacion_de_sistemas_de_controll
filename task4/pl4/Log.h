@@ -8,9 +8,11 @@
 
 class Log
 {
+private:
+    QString log_file_path;
 public:
     Log();
-    QString log_file_path;
+    Log(QString path);
     void setDatosLog(QString log_msg);
     void setDatosLog(QString log_msg,QString log_path);
     void OnAddToLog(const QString& NewDataLogIn);

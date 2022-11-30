@@ -8,10 +8,13 @@ class MyBall
 {
 public:
     MyBall();
-    MyBall(int init_x, int init_y, int init_color, int init_radio, int init_velo_x, int init_velo_y);
+    MyBall(int init_x, int init_y, int init_color, int init_radio, int init_max_velo_x, int init_max_velo_y);
 private:
     double velo_x = 0;
     double velo_y = 0;
+
+    double max_velo_x = 99;
+    double max_velo_y = 99;
     int radio = 25;
     QColor color_var = "black";
     double x = 220;
@@ -48,6 +51,13 @@ public:
     double get_velo_x();
     double get_velo_y();
     void get_velo(double *arg_x, double*arg_y);
+
+    void set_max_velo(double arg_max_velo_x, double arg_max_velo_y);
+    void set_max_velo_x(double arg_max_velo_x);
+    void set_max_velo_y(double arg_max_velo_y);
+    double get_max_velo_x();
+    double get_max_velo_y();
+    void get_max_velo(double *arg_max_x, double*arg_max_y);
 
    void set_d(int arg_dx, int arg_dy);
    void set_dx(int arg_dx);
