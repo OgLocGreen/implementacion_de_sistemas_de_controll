@@ -34,6 +34,7 @@ private:
     QString log_path = "./log_file.txt";  // #7
     Log myLogger;
 
+
     QString xml_path = "./xml_file.txt"; // #7
     Utility myUtiliy;
 

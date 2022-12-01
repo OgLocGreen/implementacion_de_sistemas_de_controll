@@ -6,6 +6,11 @@ Utility::Utility()
 
 }
 
+Utility::Utility(QString path)
+{
+    xml_file_path = path;
+}
+
 void Utility::set_xml_path(QString path)
 {
     xml_file_path = path;

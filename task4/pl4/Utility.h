@@ -17,7 +17,7 @@ private:
 
 public:
     Utility();
-
+    Utility(QString path);
     void set_xml_path(QString path);
 
     // Get_XML

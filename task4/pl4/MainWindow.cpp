@@ -5,19 +5,20 @@
 
 #include <Utility.h>
 #include <QDebug>
-
 #include <QMouseEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , myLogger(log_path)
+    , myUtiliy(xml_path)
 {
     ui->setupUi(this);
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
     timer->start(100);
-    myLogger.set_log_path(log_path); // issue #7 #TODO
+    //myLogger.set_log_path(log_path); // issue #7 #TODO
                                        // I know thats not good but does it matter?
                                        // Why should i not use it as Public Var;
     myUtiliy.set_xml_path(xml_path);
