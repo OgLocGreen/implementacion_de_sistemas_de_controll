@@ -17,7 +17,7 @@ private:
     QColorDialog BallDialog;
     QColorDialog BoardDialog;
 
-    QColor ball_color;  //Maybe i dont need them and could make it with BallDialog.
+    QColor ball_color;
     QColor board_color;
 
 public:

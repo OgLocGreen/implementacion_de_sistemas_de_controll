@@ -11,6 +11,7 @@ class Log
 private:
     QString log_file_path;
 public:
+    // Declare the Constructors and the Methods
     Log();
     Log(QString path);
     void setDatosLog(QString log_msg);

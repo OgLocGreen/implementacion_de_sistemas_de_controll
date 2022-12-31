@@ -32,9 +32,7 @@ public:
     int GetStart(const QString &textXml, const QString &tagXml);
     QString XmlCreateTag(const QString& text, bool is_start_tag);
 
-
-
-    // XML_File
+    // XML_File Read and Write to that XML Files
     QString ReadXml();
     QString ReadXml(QString xml_path);
     int WriteXml(QString xml_msg);
@@ -42,9 +40,8 @@ public:
     int AppenedToXml(QString xml_msg);
     int AppenedToXml(QString xml_msg,QString xml_path);
 
-    // Log_File // reserve
+    // Log_File
     void Log_text_string(QString text1, QString path);
-    void Log_text_stream(QTextStream text1, QString path);
 
 };
 

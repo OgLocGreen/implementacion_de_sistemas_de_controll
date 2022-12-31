@@ -7,12 +7,13 @@
 class MyBall
 {
 public:
+    // Delcare our Constructor
     MyBall();
     MyBall(int init_x, int init_y, int init_color, int init_radio, int init_max_velo_x, int init_max_velo_y);
 private:
+    // Init all Our needed Varaibles for the Class Ball
     double velo_x = 0;
     double velo_y = 0;
-
     double max_velo_x = 99;
     double max_velo_y = 99;
     int radio = 25;
@@ -22,8 +23,6 @@ private:
     int dx = 1;
     int dy = 1;
 
-
-
     double friccion = 0.05;
     int x_min = 20;
     int x_max = 420;
@@ -31,8 +30,9 @@ private:
     int y_max = 220;
 
 public:
+    // Declare all the Methodes for getting and setting Varaibles
     void set_postion(int arg_x, int arg_y);
-    int get_postion(int *arg_x, int*arg_y); //Pointer Cause we "give back "return" two Variabels
+    int get_postion(int *arg_x, int*arg_y);
     int get_postion_x();
     int get_postion_y();
     void cal_new_postion();
@@ -62,8 +62,6 @@ public:
    void set_d(int arg_dx, int arg_dy);
    void set_dx(int arg_dx);
    void set_dy(int arg_dy);
-
-
 
 };
 

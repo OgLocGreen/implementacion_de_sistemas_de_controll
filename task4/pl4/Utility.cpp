@@ -260,12 +260,6 @@ int Utility::AppenedToXml(QString xml_msg,QString xml_path)
 
 }
 
-
-
-
-
-
-
 void Utility::Log_text_string(QString text1, QString path)
 {
     QFile file_log(path);    //linux
@@ -276,15 +270,4 @@ void Utility::Log_text_string(QString text1, QString path)
     file_log.close();
 }
 
-
-void Utility::Log_text_stream(QTextStream text1, QString path)
-{
-    QFile file_log(path);    //linux
-    // writing a Stream of Text
-    // Again just works with "text like that"
-    QTextStream out(&file_log);
-
-    out << "text balablalbla"; //this works
-    //out << to_string(text1);            // this doesn´t
-}
 

@@ -8,7 +8,6 @@
 #include <QFile>
 #include <QFileDialog>
 #include "MyBall.h"
-#include "OpenFile.h"
 #include "Utility.h"
 #include <Log.h>
 
@@ -20,30 +19,36 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 private:
+    // Init all needed Classes and Variables
      Ui::MainWindow *ui;
-    bool updateMyBallSpeed=true;
-    bool pausa;
-    QTimer myTimer;
-    MyBall myBall;
-    OpenFile myFile;
-    int mouse_x;
-    int mouse_y;
-    QColor board_color = "darkGreen";
-    Utility myUtilityManager;
 
-    QString log_path = "./log_file.txt";  // #7
+    // Bool Variable to block the Update of the speed till the Calculaction is done
+    bool updateMyBallSpeed=true;
+
+    // Bool Variable for doing a Paus when the User want it
+    bool pausa;
+
+    // Init the Ball Class
+    // This Class does alle the Ball Stuff
+    // For example: Calculation the Pos, getter and setter functions for the Variabales
+    MyBall myBall;
+    // Init the Board Color couse we dont have a Board Class
+    QColor board_color = "darkGreen";
+
+    // Init the Logger Class with the right Path
+    // This Class does the Logging of the Options and what changed when
+    QString log_path = "./log_file.txt";
     Log myLogger;
 
-
-    QString xml_path = "./xml_file.txt"; // #7
+    // Init the Utility Class with the right path
+    // This Class is using diffrent small funcitons
+    QString xml_path = "./../xml_file.txt";
     Utility myUtiliy;
 
 public:
+    // Here Declare our Main Window
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-    void load_data();
-    QString XmlGetStr(const QString &textXml, const QString &tagXml);
 
 private slots:
     void on_spinBox_radio_valueChanged(int arg1);
@@ -52,17 +57,13 @@ private slots:
     void on_checkBox_pausa_clicked();
 
     void OnTimer();
-
+    void OnTimer2();
     void draw();
-    float conv(int *x, int *y);
-
 
     void on_actionChange_Params_triggered();
     void on_actionOpen_triggered();
 
     virtual void mousePressEvent(QMouseEvent *event);
-
-    void on_checkBox_reboot_stateChanged(int arg1);
-    void on_checkBox_reboot_clicked();
+    void on_pushButton_reboot_clicked();
 };
 #endif // MAINWINDOW_H

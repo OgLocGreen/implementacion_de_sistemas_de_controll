@@ -9,8 +9,8 @@ using namespace std;
 class MySignal {
     private:
     int n = 0;
-    float min = NULL;
-    float last_min = NULL;
+    float min;
+    float last_min;
     vector<float> temperatur_vektor;
 
   public:
